@@ -7,66 +7,6 @@
     android:background="@drawable/gradient"
     tools:context=".Register">
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="102dp"
-        android:layout_marginTop="289dp"
-        android:background="#11000000"
-        android:drawableLeft="@drawable/ic_action_email"
-        android:hint="Email"
-        android:textAlignment="viewStart"
-        android:textSize="15dp" />
-
-    <EditText
-        android:id="@+id/regUsername"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="57dp"
-        android:background="#11000000"
-        android:drawableLeft="@drawable/ic_action_users"
-        android:hint="UserName"
-        android:textAlignment="viewStart"
-        android:textSize="15dp" />
-
-    <EditText
-        android:id="@+id/edtPassword"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_alignStart="@+id/regUsername"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="421dp"
-        android:background="#11000000"
-        android:drawableLeft="@drawable/ic_action_pass"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textAlignment="viewStart"
-        android:textSize="16dp" />
-
-    <EditText
-        android:id="@+id/edtPassword2"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_alignStart="@+id/regUsername"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="348dp"
-        android:background="#11000000"
-        android:drawableLeft="@drawable/ic_action_pass"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textAlignment="viewStart"
-        android:textSize="16dp" />
 
     <Spinner
         android:id="@+id/spinner1"
@@ -74,7 +14,158 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="170dp"
-        android:layout_marginBottom="209dp" />
+        android:layout_marginStart="158dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginBottom="205dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginBottom="148dp"
+        android:text="math"
+        android:visibility="invisible" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/checkBox"
+        android:layout_centerHorizontal="true"
+        android:text="java"
+        android:visibility="invisible" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/checkBox"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="34dp"
+        android:text="C++"
+        android:visibility="invisible" />
+
+    <CheckBox
+        android:id="@+id/checkBox4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/checkBox"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="99dp"
+        android:text="Python"
+        android:visibility="invisible" />
+
+    <CheckBox
+        android:id="@+id/checkBox5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/checkBox4"
+        android:layout_centerHorizontal="true"
+        android:text="C"
+        android:visibility="invisible" />
+
+    <CheckBox
+        android:id="@+id/checkBox6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/checkBox3"
+        android:layout_alignBottom="@+id/checkBox4"
+        android:text="C#"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/edtUsername"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="203dp"
+        android:background="#11000000"
+        android:drawableLeft="@drawable/ic_action_users"
+        android:hint="Username" />
+
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/edtUsername"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_alignStart="@+id/edtUsername"
+        android:background="#11000000"
+        android:drawableLeft="@drawable/ic_action_pass"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/edtPassword2"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/edtPassword"
+        android:layout_marginTop="25dp"
+        android:background="#11000000"
+        android:layout_alignStart="@+id/edtUsername"
+
+        android:drawableLeft="@drawable/ic_action_pass"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/edtMail"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/edtPassword2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="#11000000"
+        android:layout_alignStart="@+id/edtUsername"
+        android:drawableLeft="@drawable/ic_action_email"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/buttonRegist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/spinner1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-18dp"
+        android:layout_marginBottom="36dp"
+        android:background="#11000000"
+        android:text="Register" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/edtFirstName"
+        android:layout_alignStart="@+id/edtUsername"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="25dp"
+        android:background="#11000000"
+        android:drawableLeft="@drawable/ic_action_users"
+        android:ems="10"
+        android:hint="LastName"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtFirstName"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/edtUsername"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="76dp"
+        android:background="#11000000"
+        android:drawableLeft="@drawable/ic_action_users"
+        android:ems="10"
+        android:hint="FirstName"
+        android:inputType="textPersonName" />
 
 </RelativeLayout>
