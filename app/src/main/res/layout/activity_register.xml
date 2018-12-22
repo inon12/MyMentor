@@ -131,6 +131,7 @@
 
     <Button
         android:id="@+id/buttonRegist"
+        android:onClick="onClickRegist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/spinner1"
@@ -141,10 +142,10 @@
         android:text="Register" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/edtlastName"
         android:layout_width="200dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/edtFirstName"
+        android:layout_below="@+id/edtFullName"
         android:layout_alignStart="@+id/edtUsername"
         android:layout_marginStart="-1dp"
         android:layout_marginTop="25dp"
@@ -155,7 +156,7 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/edtFirstName"
+        android:id="@+id/edtFullName"
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_alignStart="@+id/edtUsername"
@@ -165,7 +166,7 @@
         android:background="#11000000"
         android:drawableLeft="@drawable/ic_action_users"
         android:ems="10"
-        android:hint="FirstName"
+        android:hint="FullName"
         android:inputType="textPersonName" />
 
 </RelativeLayout>

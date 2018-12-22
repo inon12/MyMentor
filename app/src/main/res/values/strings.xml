@@ -2,9 +2,10 @@
     <string name="app_name">My Application</string>
     <string name="title_activity_home">Home</string>
 
-    <string-array name="typeSpinner" >
+    <string-array name="typeSpinner">
         <item>Student</item>
         <item>Teacher</item>
     </string-array>
+    <string name="title_activity_upload_pic">upload_pic</string>
 
 </resources>

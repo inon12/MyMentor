@@ -1,10 +1,11 @@
 package com.example.myapplication;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -14,13 +15,22 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Register extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    EditText passwordEt, passwordEt2, userNameEt, emailEt;
+    EditText passwordEt, passwordEt2, userNameEt, emailEt, nameEt, priceEt;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
-    CheckBox CheckBox, CheckBox2, CheckBox3, CheckBox4, CheckBox5, CheckBox6;
+    List<CheckBox> checkboxes = new ArrayList<CheckBox>();
+    String spinnerSelectedItem="Student";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,17 +39,19 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 
         auth = FirebaseAuth.getInstance();
 
-        passwordEt = (EditText) findViewById(R.id.edtUsername);
+        passwordEt = (EditText) findViewById(R.id.edtPassword);
         passwordEt2 = (EditText) findViewById(R.id.edtPassword2);
         emailEt = (EditText) findViewById(R.id.edtMail);
-        userNameEt = (EditText) findViewById(R.id.edtPassword);
+        userNameEt = (EditText) findViewById(R.id.edtUsername);
+        nameEt = (EditText) findViewById(R.id.edtFullName);
+        priceEt = (EditText) findViewById(R.id.edtlastName);
 
-        CheckBox = (CheckBox) findViewById(R.id.checkBox);
-        CheckBox2 = (CheckBox) findViewById(R.id.checkBox2);
-        CheckBox3 = (CheckBox) findViewById(R.id.checkBox3);
-        CheckBox4 = (CheckBox) findViewById(R.id.checkBox4);
-        CheckBox5 = (CheckBox) findViewById(R.id.checkBox5);
-        CheckBox6 = (CheckBox) findViewById(R.id.checkBox6);
+        checkboxes.add((CheckBox) findViewById(R.id.checkBox));
+        checkboxes.add((CheckBox) findViewById(R.id.checkBox2));
+        checkboxes.add((CheckBox) findViewById(R.id.checkBox3));
+        checkboxes.add((CheckBox) findViewById(R.id.checkBox4));
+        checkboxes.add((CheckBox) findViewById(R.id.checkBox5));
+        checkboxes.add((CheckBox) findViewById(R.id.checkBox6));
 
         Spinner mySpinner = (Spinner) findViewById(R.id.spinner1);
 
@@ -50,22 +62,20 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = parent.getItemAtPosition(position).toString(); //this is your selected item
-                if (selectedItem.equals("Teacher")) {
-                    CheckBox.setVisibility(view.VISIBLE);
-                    CheckBox2.setVisibility(view.VISIBLE);
-                    CheckBox3.setVisibility(view.VISIBLE);
-                    CheckBox4.setVisibility(view.VISIBLE);
-                    CheckBox5.setVisibility(view.VISIBLE);
-                    CheckBox6.setVisibility(view.VISIBLE);
-                }
-                else {
-                    CheckBox.setVisibility(view.INVISIBLE);
-                    CheckBox2.setVisibility(view.INVISIBLE);
-                    CheckBox3.setVisibility(view.INVISIBLE);
-                    CheckBox4.setVisibility(view.INVISIBLE);
-                    CheckBox5.setVisibility(view.INVISIBLE);
-                    CheckBox6.setVisibility(view.INVISIBLE);
+                spinnerSelectedItem = parent.getItemAtPosition(position).toString(); //this is your selected item
+                if (spinnerSelectedItem.equals("Teacher")) {
+                    for (CheckBox CheckBox: checkboxes){
+                        CheckBox.setVisibility(view.VISIBLE);
+                    }
+                } else {
+                    for (CheckBox CheckBox : checkboxes) {
+                        CheckBox.setVisibility(view.INVISIBLE);
+                    }
+                    for (CheckBox checkBox : checkboxes) {
+                        if (checkBox.isChecked()) {
+                            checkBox.toggle();
+                        }
+                    }
                 }
             }
 
@@ -73,11 +83,92 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 
             }
         });
+
+    }
+
+    public void onClickRegist(View view) {
+        final DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        final User user;
+
+        String password = passwordEt.getText().toString().trim();
+        String password2 = passwordEt2.getText().toString().trim();
+        String email = emailEt.getText().toString().trim();
+        String user_name = userNameEt.getText().toString().trim();
+        String name = nameEt.getText().         toString().trim();
+        String price = priceEt.getText().toString().trim();
+
+        if(!checkfields( name, price,email,password,user_name,password2))
+            return;
+
+       if (spinnerSelectedItem.equals("Teacher")) {
+           List<String> subjects = new ArrayList<String>();
+           for (CheckBox checkBox : checkboxes) {
+               if (checkBox.isChecked()) {
+                   subjects.add(checkBox.getText().toString());
+               }
+           }
+           user = new Teacher(name,price,email,user_name,password,subjects);
+        }else{
+            user = new Student(name,price,email,user_name,password);
+        }
+        db.child("users").child(user.getEmail().replace(".", "|")).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            Toast.makeText(Register.this, "User already exists", Toast.LENGTH_LONG).show();
+                        } else {
+                            if(user instanceof Teacher ) {
+                                db.child("Users").child(user.getEmail().replace(".", "|")).setValue(user);
+                                db.child("Teachers").child(user.getEmail().replace(".", "|")).setValue(user);
+                            }
+                            Toast.makeText(Register.this, "Registration done.", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(Register.this,Search.class));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+    public boolean checkfields(String first_name,String last_name,String email,String password,String user_name,String password2){
+
+        if ((TextUtils.isEmpty(email))) {
+            Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!(password.equals(password2))) {
+            Toast.makeText(getApplicationContext(), "The passwords dont the same", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if ((TextUtils.isEmpty(password2))) {
+            Toast.makeText(getApplicationContext(), "Enter password address!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(user_name)) {
+            Toast.makeText(getApplicationContext(), "Enter user_mame!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if ((TextUtils.isEmpty(first_name))) {
+            Toast.makeText(getApplicationContext(), "Enter first_name address!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(password2)) {
+            Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String sSelected = parent.getItemAtPosition(position).toString();
 
     }
 
