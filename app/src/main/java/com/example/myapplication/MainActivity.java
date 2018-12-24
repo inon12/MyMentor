@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
             return;
         }
-     db.child("users")
+     db.child("Users")
      .child(email.replace(".","|"))
      .addListenerForSingleValueEvent(
              new ValueEventListener() {
@@ -57,6 +57,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (login){
                         Toast.makeText(MainActivity.this, "incorrect.", Toast.LENGTH_LONG).show();
+                        if(user instanceof Teacher) {
+                            startActivity(new Intent(MainActivity.this,Search.class));
+                        }else{
+                            startActivity(new Intent(MainActivity.this, Search.class));
+
+                        }
+
                     }else{
                         Toast.makeText(MainActivity.this, "Either email or password is incorrect.", Toast.LENGTH_LONG).show();
                     }

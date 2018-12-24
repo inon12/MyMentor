@@ -96,12 +96,12 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         String user_name = userNameEt.getText().toString().trim();
         String name = nameEt.getText().         toString().trim();
         String price = priceEt.getText().toString().trim();
-
+        final List<String> subjects = new ArrayList<String>();
         if(!checkfields( name, price,email,password,user_name,password2))
             return;
 
        if (spinnerSelectedItem.equals("Teacher")) {
-           List<String> subjects = new ArrayList<String>();
+
            for (CheckBox checkBox : checkboxes) {
                if (checkBox.isChecked()) {
                    subjects.add(checkBox.getText().toString());
@@ -111,7 +111,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         }else{
             user = new Student(name,price,email,user_name,password);
         }
-        db.child("users").child(user.getEmail().replace(".", "|")).addListenerForSingleValueEvent(
+        db.child("Users").child(user.getEmail().replace(".", "|")).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -120,10 +120,16 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                         } else {
                             if(user instanceof Teacher ) {
                                 db.child("Users").child(user.getEmail().replace(".", "|")).setValue(user);
-                                db.child("Teachers").child(user.getEmail().replace(".", "|")).setValue(user);
+                                for(String s:subjects){
+                                    db.child("Subjects").child(s).child(user.getEmail().replace(".", "|")).setValue(user);
+                                }
+
+                            }
+                            else {
+                                db.child("Users").child(user.getEmail().replace(".", "|")).setValue(user);
                             }
                             Toast.makeText(Register.this, "Registration done.", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(Register.this,Search.class));
+                            startActivity(new Intent(Register.this,MainActivity.class));
                         }
                     }
 
