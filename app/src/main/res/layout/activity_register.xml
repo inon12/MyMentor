@@ -152,8 +152,8 @@
         android:background="#11000000"
         android:drawableLeft="@drawable/ic_action_users"
         android:ems="10"
-        android:hint="LastName"
-        android:inputType="textPersonName" />
+        android:hint="Price per hour"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/edtFullName"

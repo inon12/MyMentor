@@ -1,9 +1,10 @@
 package com.example.myapplication;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
     protected List<String> subjects;
     protected String password;
     protected String email;

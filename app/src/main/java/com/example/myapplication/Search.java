@@ -1,11 +1,13 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -34,6 +36,8 @@ public class Search extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+
 
         mUserDatabase=FirebaseDatabase.getInstance().getReference("Subjects");
 
@@ -66,6 +70,7 @@ public class Search extends AppCompatActivity {
         FirebaseRecyclerOptions<User> options=new FirebaseRecyclerOptions.Builder<User>()
                 .setQuery(firebaseSearchQuery,User.class)
                 .build();
+
         FirebaseRecyclerAdapter<User, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UsersViewHolder>(options) {
             @NonNull
             @Override
@@ -76,10 +81,19 @@ public class Search extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull UsersViewHolder holder, int position, @NonNull User model) {
+            protected void onBindViewHolder(@NonNull final UsersViewHolder holder, int position, @NonNull final User model) {
                 holder.setDetails(getApplicationContext(), model.getName(), model.getPrice(), model.getImage());
+                holder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
+                        Intent mIntent = new Intent(getApplicationContext(), DetailActivity.class);
+                        mIntent.putExtra("model",model);
+                        startActivity(mIntent);
+                    }
+                });
             }
+
 
         };
 
@@ -100,6 +114,9 @@ public class Search extends AppCompatActivity {
             TextView user_name =(TextView) mView.findViewById(R.id.name_text);
             TextView user_price =(TextView) mView.findViewById(R.id.status_text);
             ImageView user_image =(ImageView) mView.findViewById(R.id.profile_image);
+            TextView user_email =(TextView) mView.findViewById(R.id.status_text);
+
+
 
             user_name.setText(userName);
             user_price.setText(userPrice);

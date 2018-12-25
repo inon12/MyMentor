@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".DetailActivity">
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="120dp"
+        android:layout_height="121dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="132dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="54dp"
+        app:srcCompat="@mipmap/person_four" />
+
+    <TextView
+        android:id="@+id/name_text"
+        android:layout_width="232dp"
+        android:layout_height="82dp"
+        android:layout_below="@+id/profile_image"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nunito_semibold"
+        android:gravity="center"
+        android:text="Username"
+        android:textColor="#555555"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/subjects"
+        android:layout_width="173dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/price"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="14dp"
+        android:layout_toEndOf="@+id/textView14"
+        android:gravity="left"
+        android:text="subjects" />
+
+    <RatingBar
+        android:id="@+id/rating_rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/name_text"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="283dp"
+        android:numStars="5"
+        android:stepSize=".5" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="173dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/mail"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="14dp"
+        android:layout_toEndOf="@+id/textView4"
+        android:text="price" />
+
+    <TextView
+        android:id="@+id/mail"
+        android:layout_width="173dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="215dp"
+        android:layout_toEndOf="@+id/textView5"
+        android:text="mail" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_above="@+id/textView4"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="14dp"
+        android:text="Sebjects:"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_above="@+id/mail"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="15dp"
+        android:text="Price per hour:"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="214dp"
+        android:text="Email:"
+        android:textStyle="bold" />
+
+</RelativeLayout>
