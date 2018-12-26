@@ -67,11 +67,11 @@ public class Search extends AppCompatActivity {
 
         Query firebaseSearchQuery = mUserDatabase.child(searchText).orderByChild("name");
 
-        FirebaseRecyclerOptions<User> options=new FirebaseRecyclerOptions.Builder<User>()
-                .setQuery(firebaseSearchQuery,User.class)
+        FirebaseRecyclerOptions<Teacher> options=new FirebaseRecyclerOptions.Builder<Teacher>()
+                .setQuery(firebaseSearchQuery,Teacher.class)
                 .build();
 
-        FirebaseRecyclerAdapter<User, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UsersViewHolder>(options) {
+        FirebaseRecyclerAdapter<Teacher, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Teacher, UsersViewHolder>(options) {
             @NonNull
             @Override
             public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -81,7 +81,7 @@ public class Search extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull final UsersViewHolder holder, int position, @NonNull final User model) {
+            protected void onBindViewHolder(@NonNull final UsersViewHolder holder, int position, @NonNull final Teacher model) {
                 holder.setDetails(getApplicationContext(), model.getName(), model.getPrice(), model.getImage());
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -114,9 +114,6 @@ public class Search extends AppCompatActivity {
             TextView user_name =(TextView) mView.findViewById(R.id.name_text);
             TextView user_price =(TextView) mView.findViewById(R.id.status_text);
             ImageView user_image =(ImageView) mView.findViewById(R.id.profile_image);
-            TextView user_email =(TextView) mView.findViewById(R.id.status_text);
-
-
 
             user_name.setText(userName);
             user_price.setText(userPrice);

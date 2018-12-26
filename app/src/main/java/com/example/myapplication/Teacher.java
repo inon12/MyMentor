@@ -7,8 +7,11 @@ public class Teacher extends User {
 
 
     String type="Teacher";
-    float Rank=0;
+    protected float rank;
+    protected List<String> subjects;
+    protected int count;
 
+    public Teacher(){}
     public Teacher(String first_name, String last_name, String email, String password, String user_name, List<String> subject){
         this.password=password;
         this.email=email;
@@ -17,12 +20,24 @@ public class Teacher extends User {
         this.user_name=user_name;
         this.subjects=new ArrayList<>(subject);
     }
-    public float getRank() {
-        return Rank;
-    }
-
+   public float getRank() {
+        return rank;
+  }
     public void setRank(float rank) {
-        Rank = rank;
+       this.rank = rank;
+    }
+    public List<String> getSubjects() {
+        return subjects;
     }
 
+    public void setSubjects(List<String> subjects) {
+        this.subjects = subjects;
+    }
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 }

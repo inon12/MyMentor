@@ -107,9 +107,9 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                    subjects.add(checkBox.getText().toString());
                }
            }
-           user = new Teacher(name,price,email,user_name,password,subjects);
+           user = new Teacher(name,price,email,password,user_name,subjects);
         }else{
-            user = new Student(name,price,email,user_name,password);
+            user = new Student(name,price,email,password,user_name);
         }
         db.child("Users").child(user.getEmail().replace(".", "|")).addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -119,7 +119,9 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                             Toast.makeText(Register.this, "User already exists", Toast.LENGTH_LONG).show();
                         } else {
                             if(user instanceof Teacher ) {
+                                db.child("Teachers").child(user.getEmail().replace(".", "|")).setValue(user);
                                 db.child("Users").child(user.getEmail().replace(".", "|")).setValue(user);
+
                                 for(String s:subjects){
                                     db.child("Subjects").child(s).child(user.getEmail().replace(".", "|")).setValue(user);
                                 }

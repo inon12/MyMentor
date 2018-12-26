@@ -1,14 +1,21 @@
 package com.example.myapplication;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RatingBar;
-import android.widget.TextView;
+        import android.content.Intent;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.RatingBar;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
 public class DetailActivity extends AppCompatActivity {
+
+    Button mSubmit,mSendMail,mRateMe;
+    RatingBar ratingBar,ratingRatingBar;
+    Teacher user;
+    TextView mRateCount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +26,22 @@ public class DetailActivity extends AppCompatActivity {
         TextView mSubjects=(TextView)findViewById(R.id.subjects);
         TextView mPrice=(TextView)findViewById(R.id.price);
         TextView mMail=(TextView)findViewById(R.id.mail);
+        mRateCount=(TextView)findViewById(R.id.rateCount);
+
+        mRateMe=(Button)findViewById(R.id.rateMe);
+        mSendMail=(Button)findViewById(R.id.send_mail);
+        mSubmit=(Button)findViewById(R.id.submit);
+
+        ratingRatingBar = (RatingBar) findViewById(R.id.rating_rating_bar);
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
         Intent intent=getIntent();
-        User user=(User)intent.getSerializableExtra("model");
+        user=(Teacher)intent.getSerializableExtra("model");
 
         mName.setText(user.getName());
         mPrice.setText(user.getPrice());
         mMail.setText(user.getEmail());
-
-
+        mRateCount.setText("rated by"+user.getCount()+" users");
 
         String subjects="";
         for (int i=0;i<user.getSubjects().size()-1;i++){
@@ -36,10 +50,40 @@ public class DetailActivity extends AppCompatActivity {
         subjects+=user.getSubjects().get(user.getSubjects().size()-1)+".";
         mSubjects.setText(subjects);
 
-        final RatingBar ratingRatingBar = (RatingBar) findViewById(R.id.rating_rating_bar);
         ratingRatingBar.setIsIndicator(true);
-      //  ratingRatingBar.setRating(user.);
+        ratingRatingBar.setRating(user.getRank());
 
-     }
     }
+    public void onClickReteMe(View view){
+        mRateMe.setVisibility(view.INVISIBLE);
+        ratingBar.setVisibility(view.VISIBLE);
+        mSubmit.setVisibility(view.VISIBLE);
+        mSendMail.setVisibility(view.INVISIBLE);
+    }
+    public void onClickSubmit(View view){
+        user.setCount(user.getCount()+1);
+        Toast.makeText(DetailActivity.this, "Thanks for your rate", Toast.LENGTH_LONG).show();
+        user.setRank((ratingBar.getRating()+(user.getRank()*(user.getCount()-1)))/(user.getCount()));
+        ratingBar.setIsIndicator(true);
+        ratingRatingBar.setRating(user.getRank());
+        mRateCount.setText("rated by "+user.getCount()+" users");
+        mRateMe.setEnabled(false);
+        mRateMe.setVisibility(view.VISIBLE);
+        ratingBar.setVisibility(view.INVISIBLE);
+        mSubmit.setVisibility(view.INVISIBLE);
+        mSendMail.setVisibility(view.VISIBLE);
+    }
+    public void onClickSendmail(View view){
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{user.email});
+        i.putExtra(Intent.EXTRA_SUBJECT, "Hey i saw your details in MyMentor");
+        //i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(DetailActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+}
 

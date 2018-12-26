@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Serializable {
-    protected List<String> subjects;
     protected String password;
     protected String email;
     protected String price;
@@ -13,9 +12,6 @@ public class User implements Serializable {
     protected String user_name;
     protected String image="https://firebasestorage.googleapis.com/v0/b/myapplication-c864e.appspot.com/o/default_user.png?alt=media&token=257b33ff-4197-43b7-82af-74d6ad47e394";
 
-    public List<String> getSubjects() {
-        return subjects;
-    }
 
     public String getImage() {
         return image;
