@@ -10,7 +10,7 @@ public class User implements Serializable {
     protected String price;
     protected String name;
     protected String user_name;
-    protected String image="https://firebasestorage.googleapis.com/v0/b/myapplication-c864e.appspot.com/o/default_user.png?alt=media&token=257b33ff-4197-43b7-82af-74d6ad47e394";
+    protected String image="https://firebasestorage.googleapis.com/v0/b/myapplication-c864e.appspot.com/o/Hdar.png?alt=media&token=c69a4710-239b-4549-997e-335af47c977a";
 
 
     public String getImage() {

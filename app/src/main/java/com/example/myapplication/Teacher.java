@@ -12,13 +12,14 @@ public class Teacher extends User {
     protected int count;
 
     public Teacher(){}
-    public Teacher(String first_name, String last_name, String email, String password, String user_name, List<String> subject){
+    public Teacher(String first_name, String last_name, String email, String password, String user_name, List<String> subject,float rank){
         this.password=password;
         this.email=email;
         this.name=first_name;
         this.price=last_name;
         this.user_name=user_name;
         this.subjects=new ArrayList<>(subject);
+        this.rank=rank;
     }
    public float getRank() {
         return rank;

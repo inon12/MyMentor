@@ -45,8 +45,13 @@ public class Search extends AppCompatActivity {
         mSearchBtn=(ImageButton)findViewById(R.id.search_btn);
 
         mResultList=(RecyclerView)findViewById(R.id.result_list);
-       // mResultList.setHasFixedSize(true);
-        mResultList.setLayoutManager(new LinearLayoutManager(this));
+        mResultList.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(Search.this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        mResultList.setLayoutManager(layoutManager);
+
 
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +70,7 @@ public class Search extends AppCompatActivity {
 
         Toast.makeText(Search.this, "Started Search", Toast.LENGTH_LONG).show();
 
-        Query firebaseSearchQuery = mUserDatabase.child(searchText).orderByChild("name");
+        Query firebaseSearchQuery = mUserDatabase.child(searchText).orderByChild("rank").limitToFirst(10);
 
         FirebaseRecyclerOptions<Teacher> options=new FirebaseRecyclerOptions.Builder<Teacher>()
                 .setQuery(firebaseSearchQuery,Teacher.class)
@@ -82,7 +87,7 @@ public class Search extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(@NonNull final UsersViewHolder holder, int position, @NonNull final Teacher model) {
-                holder.setDetails(getApplicationContext(), model.getName(), model.getPrice(), model.getImage());
+                holder.setDetails(getApplicationContext(), model.getName(), model.getPrice(), model.getImage(),model.getRank()+"");
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -109,22 +114,20 @@ public class Search extends AppCompatActivity {
 
             mView=itemView;
         }
-        public void setDetails(Context ctx, String userName, String userPrice, String userImage){
+        public void setDetails(Context ctx, String userName, String userPrice, String userImage,String userRank){
 
             TextView user_name =(TextView) mView.findViewById(R.id.name_text);
             TextView user_price =(TextView) mView.findViewById(R.id.status_text);
             ImageView user_image =(ImageView) mView.findViewById(R.id.profile_image);
+            TextView user_rank =(TextView) mView.findViewById(R.id.rank);
+
 
             user_name.setText(userName);
-            user_price.setText(userPrice);
+            user_rank.setText(userRank);
+            user_price.setText("Price per hour :\n"+userPrice);
             Glide.with(ctx).load(userImage).into(user_image);
         }
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-}
 }

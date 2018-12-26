@@ -5,9 +5,14 @@ package com.example.myapplication;
         import android.os.Bundle;
         import android.view.View;
         import android.widget.Button;
+        import android.widget.ImageView;
         import android.widget.RatingBar;
         import android.widget.TextView;
         import android.widget.Toast;
+
+        import com.bumptech.glide.Glide;
+        import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.database.FirebaseDatabase;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -27,6 +32,9 @@ public class DetailActivity extends AppCompatActivity {
         TextView mPrice=(TextView)findViewById(R.id.price);
         TextView mMail=(TextView)findViewById(R.id.mail);
         mRateCount=(TextView)findViewById(R.id.rateCount);
+        ImageView mImage=(ImageView)findViewById(R.id.profile_image);
+
+
 
         mRateMe=(Button)findViewById(R.id.rateMe);
         mSendMail=(Button)findViewById(R.id.send_mail);
@@ -41,7 +49,7 @@ public class DetailActivity extends AppCompatActivity {
         mName.setText(user.getName());
         mPrice.setText(user.getPrice());
         mMail.setText(user.getEmail());
-        mRateCount.setText("rated by"+user.getCount()+" users");
+        mRateCount.setText("rated by "+user.getCount()+" users");
 
         String subjects="";
         for (int i=0;i<user.getSubjects().size()-1;i++){
@@ -49,6 +57,8 @@ public class DetailActivity extends AppCompatActivity {
         }
         subjects+=user.getSubjects().get(user.getSubjects().size()-1)+".";
         mSubjects.setText(subjects);
+
+        Glide.with(getBaseContext()).load(user.getImage()).into(mImage);
 
         ratingRatingBar.setIsIndicator(true);
         ratingRatingBar.setRating(user.getRank());
@@ -61,17 +71,28 @@ public class DetailActivity extends AppCompatActivity {
         mSendMail.setVisibility(view.INVISIBLE);
     }
     public void onClickSubmit(View view){
-        user.setCount(user.getCount()+1);
+        final DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         Toast.makeText(DetailActivity.this, "Thanks for your rate", Toast.LENGTH_LONG).show();
+        user.setCount(user.getCount()+1);
         user.setRank((ratingBar.getRating()+(user.getRank()*(user.getCount()-1)))/(user.getCount()));
+
         ratingBar.setIsIndicator(true);
         ratingRatingBar.setRating(user.getRank());
         mRateCount.setText("rated by "+user.getCount()+" users");
+
         mRateMe.setEnabled(false);
         mRateMe.setVisibility(view.VISIBLE);
         ratingBar.setVisibility(view.INVISIBLE);
         mSubmit.setVisibility(view.INVISIBLE);
         mSendMail.setVisibility(view.VISIBLE);
+
+        db.child("Teachers").child(user.getEmail().replace(".", "|")).setValue(user);
+        db.child("Users").child(user.getEmail().replace(".", "|")).setValue(user);
+
+        for(String s:user.getSubjects()){
+            db.child("Subjects").child(s).child(user.getEmail().replace(".", "|")).setValue(user);
+        }
+
     }
     public void onClickSendmail(View view){
         Intent i = new Intent(Intent.ACTION_SEND);

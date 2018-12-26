@@ -29,7 +29,7 @@
         android:background="#11000000"
         android:drawableLeft="@drawable/ic_action_users"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Email"
         android:inputType="textPersonName"
         android:textSize="16dp" />
 
