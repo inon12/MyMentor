@@ -14,6 +14,8 @@ package com.example.myapplication;
         import com.google.firebase.database.DatabaseReference;
         import com.google.firebase.database.FirebaseDatabase;
 
+        import de.hdodenhof.circleimageview.CircleImageView;
+
 public class DetailActivity extends AppCompatActivity {
 
     Button mSubmit,mSendMail,mRateMe;
@@ -32,8 +34,8 @@ public class DetailActivity extends AppCompatActivity {
         TextView mPrice=(TextView)findViewById(R.id.price);
         TextView mMail=(TextView)findViewById(R.id.mail);
         mRateCount=(TextView)findViewById(R.id.rateCount);
-        ImageView mImage=(ImageView)findViewById(R.id.profile_image);
-
+        CircleImageView mImage=(CircleImageView)findViewById(R.id.profile_image);
+        mImage.setImageDrawable(getResources().getDrawable(R.drawable.gradient));
 
 
         mRateMe=(Button)findViewById(R.id.rateMe);

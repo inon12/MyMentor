@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Search extends AppCompatActivity {
 
     private EditText mSearchField;
@@ -118,7 +120,7 @@ public class Search extends AppCompatActivity {
 
             TextView user_name =(TextView) mView.findViewById(R.id.name_text);
             TextView user_price =(TextView) mView.findViewById(R.id.status_text);
-            ImageView user_image =(ImageView) mView.findViewById(R.id.profile_image);
+            CircleImageView user_image =(CircleImageView) mView.findViewById(R.id.profile_image);
             TextView user_rank =(TextView) mView.findViewById(R.id.rank);
 
 

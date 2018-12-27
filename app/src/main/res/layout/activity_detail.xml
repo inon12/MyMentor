@@ -7,25 +7,35 @@
     android:background="@drawable/gradient"
     tools:context=".DetailActivity">
 
-    <ImageView
+    <!--<ImageView-->
+        <!--android:id="@+id/profile_image"-->
+        <!--android:layout_width="120dp"-->
+        <!--android:layout_height="121dp"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginStart="132dp"-->
+        <!--android:layout_marginLeft="30dp"-->
+        <!--android:layout_marginTop="54dp"-->
+        <!--app:srcCompat="@mipmap/person_four" />-->
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
-        android:layout_width="120dp"
-        android:layout_height="121dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="132dp"
+        android:layout_marginStart="120dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="54dp"
-        app:srcCompat="@mipmap/person_four" />
+        android:src="@mipmap/person_four"
+        app:civ_border_width="2dp" />
 
     <TextView
         android:id="@+id/name_text"
-        android:layout_width="232dp"
-        android:layout_height="82dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
         android:layout_below="@+id/profile_image"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="78dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="9dp"
         android:fontFamily="@font/nunito_semibold"
         android:gravity="center"
         android:text="Username"
@@ -50,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/name_text"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="-15dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="279dp"
         android:numStars="5"
         android:stepSize="0.1" />
