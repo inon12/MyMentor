@@ -10,8 +10,16 @@ public class User implements Serializable {
     protected String price;
     protected String name;
     protected String user_name;
-    protected String image="https://firebasestorage.googleapis.com/v0/b/myapplication-c864e.appspot.com/o/Hadar%20Alon.png?alt=media&token=0f00cc27-45b5-4e4a-ad31-29464fb2f66f";
+    protected String type;
+    protected String image="https://firebasestorage.googleapis.com/v0/b/myapplication-c864e.appspot.com/o/default_user.png?alt=media&token=2ac9bd79-f370-4419-b56d-2fc96cf87e0e";
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getImage() {
         return image;

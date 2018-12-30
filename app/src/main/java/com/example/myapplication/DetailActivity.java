@@ -3,14 +3,18 @@ package com.example.myapplication;
         import android.content.Intent;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
+        import android.support.v7.widget.Toolbar;
+        import android.view.Menu;
+        import android.view.MenuInflater;
+        import android.view.MenuItem;
         import android.view.View;
         import android.widget.Button;
-        import android.widget.ImageView;
         import android.widget.RatingBar;
         import android.widget.TextView;
         import android.widget.Toast;
 
         import com.bumptech.glide.Glide;
+        import com.google.firebase.auth.FirebaseAuth;
         import com.google.firebase.database.DatabaseReference;
         import com.google.firebase.database.FirebaseDatabase;
 
@@ -29,8 +33,11 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         TextView mName=(TextView)findViewById(R.id.name_text);
-        TextView mSubjects=(TextView)findViewById(R.id.subjects);
+        TextView mSubjects=(TextView)findViewById(R.id.sSubjects);
         TextView mPrice=(TextView)findViewById(R.id.price);
         TextView mMail=(TextView)findViewById(R.id.mail);
         mRateCount=(TextView)findViewById(R.id.rateCount);
@@ -107,6 +114,23 @@ public class DetailActivity extends AppCompatActivity {
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(DetailActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
         }
+    }
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.sign_out:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(DetailActivity.this, MainActivity.class));
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -47,20 +48,23 @@ public class MainActivity extends AppCompatActivity {
                  @Override
                  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     boolean login=false;
-                    User user=null;
+                     Teacher user=null;
 
                     if(dataSnapshot.exists()){
-                        user=dataSnapshot.getValue(User.class);
+                        user=dataSnapshot.getValue(Teacher.class);
                         if(password.equals(user.getPassword())){
                             login=true;
                         }
                     }
                     if (login){
                         Toast.makeText(MainActivity.this, "incorrect.", Toast.LENGTH_LONG).show();
-                        if(user instanceof Teacher) {
-                            startActivity(new Intent(MainActivity.this,Search.class));
+                        if(user.getType().equals("Teacher")) {
+                            Intent mIntent = new Intent(getApplicationContext(), TeacherDetails.class);
+                            Teacher teacher=(Teacher)user;
+                            mIntent.putExtra("model",teacher);
+                            startActivity(mIntent);
                         }else{
-                            startActivity(new Intent(MainActivity.this, Search.class));
+                            startActivity(new Intent(MainActivity.this,Search.class));
 
                         }
 

@@ -27,7 +27,6 @@ import java.util.List;
 public class Register extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     EditText passwordEt, passwordEt2, userNameEt, emailEt, nameEt, priceEt;
-    private ProgressBar progressBar;
     private FirebaseAuth auth;
     List<CheckBox> checkboxes = new ArrayList<CheckBox>();
     String spinnerSelectedItem="Student";
@@ -46,12 +45,12 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         nameEt = (EditText) findViewById(R.id.edtFullName);
         priceEt = (EditText) findViewById(R.id.edtlastName);
 
-        checkboxes.add((CheckBox) findViewById(R.id.checkBox));
-        checkboxes.add((CheckBox) findViewById(R.id.checkBox2));
+        checkboxes.add((CheckBox) findViewById(R.id.math));
+        checkboxes.add((CheckBox) findViewById(R.id.java));
         checkboxes.add((CheckBox) findViewById(R.id.checkBox3));
-        checkboxes.add((CheckBox) findViewById(R.id.checkBox4));
-        checkboxes.add((CheckBox) findViewById(R.id.checkBox5));
-        checkboxes.add((CheckBox) findViewById(R.id.checkBox6));
+        checkboxes.add((CheckBox) findViewById(R.id.Python));
+        checkboxes.add((CheckBox) findViewById(R.id.C));
+        checkboxes.add((CheckBox) findViewById(R.id.PHP));
 
         Spinner mySpinner = (Spinner) findViewById(R.id.spinner1);
 

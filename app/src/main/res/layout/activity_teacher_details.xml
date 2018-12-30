@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".DetailActivity">
-
+    tools:context=".TeacherDetails">
 
     <include layout="@layout/toolbar" />
 
@@ -21,7 +20,17 @@
         android:layout_marginTop="54dp"
         android:src="@mipmap/person_four"
         app:civ_border_width="2dp" />
-
+    <TextView
+        android:id="@+id/sSubjects"
+        android:layout_width="173dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/price"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginBottom="14dp"
+        android:layout_toEndOf="@+id/subjects"
+        android:gravity="left"
+        android:text="subjects" />
     <TextView
         android:id="@+id/name_text"
         android:layout_width="match_parent"
@@ -34,19 +43,6 @@
         android:text="Username"
         android:textColor="#555555"
         android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/sSubjects"
-        android:layout_width="173dp"
-        android:layout_height="40dp"
-        android:layout_above="@+id/price"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="51dp"
-        android:layout_marginBottom="14dp"
-        android:layout_toEndOf="@+id/subjects"
-        android:gravity="left"
-        android:text="subjects" />
-
     <RatingBar
         android:id="@+id/rating_rating_bar"
         android:layout_width="wrap_content"
@@ -111,42 +107,6 @@
         android:layout_marginBottom="214dp"
         android:text="Email:"
         android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/rateMe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="87dp"
-        android:layout_marginEnd="91dp"
-        android:layout_marginBottom="149dp"
-        android:layout_toStartOf="@+id/send_mail"
-        android:onClick="onClickReteMe"
-        android:text="Rate me!" />
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/rateMe"
-        android:layout_marginStart="-48dp"
-        android:layout_marginBottom="-10dp"
-        android:visibility="invisible"
-        android:layout_toEndOf="@+id/sPrice" />
-
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="134dp"
-        android:layout_marginBottom="84dp"
-        android:visibility="invisible"
-        android:onClick="onClickSubmit"
-        android:text="Submit" />
-
     <TextView
         android:id="@+id/rateCount"
         android:layout_width="249dp"
@@ -156,15 +116,85 @@
         android:layout_marginEnd="-266dp"
         android:layout_toStartOf="@+id/price"
         android:text="TextView" />
-
-    <Button
-        android:id="@+id/send_mail"
+    <CheckBox
+        android:id="@+id/math"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ratingBar"
-        android:layout_marginStart="-57dp"
-        android:layout_toEndOf="@+id/sSubjects"
-        android:onClick="onClickSendmail"
-        android:text="Send Email" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginBottom="148dp"
+        android:text="math"
+        android:visibility="invisible" />
+
+    <CheckBox
+        android:id="@+id/java"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/math"
+        android:layout_centerHorizontal="true"
+        android:text="java"
+        android:visibility="invisible" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/math"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="34dp"
+        android:text="C++"
+        android:visibility="invisible" />
+
+    <CheckBox
+        android:id="@+id/Python"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/math"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="99dp"
+        android:text="Python"
+        android:visibility="invisible" />
+
+    <CheckBox
+        android:id="@+id/C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Python"
+        android:layout_centerHorizontal="true"
+        android:text="C"
+        android:visibility="invisible" />
+
+    <CheckBox
+        android:id="@+id/PHP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/checkBox3"
+        android:layout_alignBottom="@+id/Python"
+        android:text="PHP"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/editSubjects"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/math"
+        android:layout_alignEnd="@+id/profile_image"
+        android:layout_marginTop="-4dp"
+        android:layout_marginEnd="-5dp"
+        android:onClick="onClickEditSubjects"
+        android:text="Edit subjects" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/java"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-37dp"
+        android:layout_marginBottom="48dp"
+        android:onClick="onclickSubmit"
+        android:text="Submit"
+        android:visibility="invisible" />
 
 </RelativeLayout>

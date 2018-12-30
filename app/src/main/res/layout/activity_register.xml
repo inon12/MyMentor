@@ -19,7 +19,7 @@
         android:layout_marginBottom="205dp" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/math"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -30,10 +30,10 @@
         android:visibility="invisible" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/java"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/checkBox"
+        android:layout_alignTop="@+id/math"
         android:layout_centerHorizontal="true"
         android:text="java"
         android:visibility="invisible" />
@@ -42,38 +42,38 @@
         android:id="@+id/checkBox3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/checkBox"
+        android:layout_alignTop="@+id/math"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="34dp"
         android:text="C++"
         android:visibility="invisible" />
 
     <CheckBox
-        android:id="@+id/checkBox4"
+        android:id="@+id/Python"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/checkBox"
+        android:layout_alignStart="@+id/math"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="99dp"
         android:text="Python"
         android:visibility="invisible" />
 
     <CheckBox
-        android:id="@+id/checkBox5"
+        android:id="@+id/C"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/checkBox4"
+        android:layout_alignTop="@+id/Python"
         android:layout_centerHorizontal="true"
         android:text="C"
         android:visibility="invisible" />
 
     <CheckBox
-        android:id="@+id/checkBox6"
+        android:id="@+id/PHP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/checkBox3"
-        android:layout_alignBottom="@+id/checkBox4"
-        android:text="C#"
+        android:layout_alignBottom="@+id/Python"
+        android:text="PHP"
         android:visibility="invisible" />
 
     <EditText
