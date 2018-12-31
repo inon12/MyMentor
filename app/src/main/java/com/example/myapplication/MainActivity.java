@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                  @Override
                  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     boolean login=false;
-                     Teacher user=null;
+                     User user=null;
 
                     if(dataSnapshot.exists()){
                         user=dataSnapshot.getValue(Teacher.class);

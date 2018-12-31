@@ -106,9 +106,9 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                    subjects.add(checkBox.getText().toString());
                }
            }
-           user = new Teacher(name,price,email,password,user_name,subjects,0);
+           user = new Teacher(name,price,email,password,user_name,subjects,0,"Teacher");
         }else{
-            user = new Student(name,price,email,password,user_name);
+            user = new Student(name,price,email,password,user_name,"Student");
         }
         db.child("Users").child(user.getEmail().replace(".", "|")).addListenerForSingleValueEvent(
                 new ValueEventListener() {

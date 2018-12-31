@@ -10,13 +10,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="120dp"
-        android:layout_height="150dp"
+        android:layout_width="184dp"
+        android:layout_height="151dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="142dp"
-        android:layout_marginTop="52dp"
-        app:srcCompat="@drawable/logo" />
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="110dp"
+        app:srcCompat="@drawable/logo2" />
 
     <EditText
         android:id="@+id/edtUsername"
@@ -29,7 +29,8 @@
         android:background="#11000000"
         android:drawableLeft="@drawable/ic_action_users"
         android:ems="10"
-        android:hint="Email"
+        android:hint="Email
+"
         android:inputType="textPersonName"
         android:textSize="16dp" />
 

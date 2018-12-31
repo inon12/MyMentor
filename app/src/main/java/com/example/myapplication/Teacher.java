@@ -5,14 +5,12 @@ import java.util.List;
 
 public class Teacher extends User {
 
-
-    String type="Teacher";
     protected float rank;
     protected List<String> subjects;
     protected int count;
 
     public Teacher(){}
-    public Teacher(String first_name, String last_name, String email, String password, String user_name, List<String> subject,float rank){
+    public Teacher(String first_name, String last_name, String email, String password, String user_name, List<String> subject,float rank,String type){
         this.password=password;
         this.email=email;
         this.name=first_name;
@@ -20,6 +18,7 @@ public class Teacher extends User {
         this.user_name=user_name;
         this.subjects=new ArrayList<>(subject);
         this.rank=rank;
+        this.type=type;
     }
    public float getRank() {
         return rank;
